@@ -1,11 +1,8 @@
 package br.edu.atitus.product_service.controllers;
 
-import javax.security.sasl.AuthenticationException;
-
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -41,9 +38,6 @@ public class WsProductControllers {
 			@RequestHeader("X-User-Id") Long userId,
 			@RequestHeader("X-User-Email") String emailUser,
 			@RequestHeader("X-User-Type") Integer userType) throws Exception{
-		//Somente Admins
-		if (userType != 0)
-			throw new AuthenticationException("Usuário sem permissão");
 		
 		var product = convertDto2Entity(dto);
 		product.setStock(10);
@@ -59,9 +53,6 @@ public class WsProductControllers {
 			@RequestHeader("X-User-Id") Long userId,
 			@RequestHeader("X-User-Email") String emailUser,
 			@RequestHeader("X-User-Type") Integer userType) throws Exception{
-		//Somente Admins
-		if (userType != 0)
-			throw new AuthenticationException("Usuário sem permissão");
 		
 		var product = convertDto2Entity(dto);
 		product.setId(idProduct);
@@ -77,20 +68,9 @@ public class WsProductControllers {
 			@RequestHeader("X-User-Id") Long userId,
 			@RequestHeader("X-User-Email") String emailUser,
 			@RequestHeader("X-User-Type") Integer userType) throws Exception{
-		//Somente Admins
-		if (userType != 0)
-			throw new AuthenticationException("Usuário sem permissão");
 		
 		repository.deleteById(idProduct);
 		
 		return ResponseEntity.ok("Excluído");
-	}
-
-
-	
-	@ExceptionHandler(AuthenticationException.class)
-	public ResponseEntity<String> handlerAuth(AuthenticationException e){
-		String message = e.getMessage().replaceAll("[\\r\\n]", "");
-		return ResponseEntity.status(403).body(message);
 	}
 }

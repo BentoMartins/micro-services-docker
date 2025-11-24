@@ -30,6 +30,9 @@ public class UserEntity implements UserDetails{
 	@Column(nullable = false)
 	private String email;
 	
+	@Column(length = 20)
+	private String phone;
+	
 	@Column(nullable = false)
 	@JsonIgnore
 	private String password;
@@ -60,6 +63,14 @@ public class UserEntity implements UserDetails{
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 
 	public String getPassword() {

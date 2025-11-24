@@ -6,6 +6,8 @@ public record ProductDTO(
 		String model, 
 		String currency, 
 		double price,
-		String imageUrl) {
+		String imageUrl,
+		String category,
+		String condition) {
 
 }

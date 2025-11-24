@@ -27,6 +27,12 @@ public class ProductEntity {
 	@Column(name = "image_url")
 	private String imageUrl;
 	
+	@Column(length = 50)
+	private String category;
+	
+	@Column(length = 50)
+	private String condition;
+	
 	@Transient
 	private String enviroment;
 	@Transient
@@ -92,8 +98,18 @@ public class ProductEntity {
 	public void setImageUrl(String imageUrl) {
 		this.imageUrl = imageUrl;
 	}
-	
-	
+	public String getCategory() {
+		return category;
+	}
+	public void setCategory(String category) {
+		this.category = category;
+	}
+	public String getCondition() {
+		return condition;
+	}
+	public void setCondition(String condition) {
+		this.condition = condition;
+	}
 	
 
 }

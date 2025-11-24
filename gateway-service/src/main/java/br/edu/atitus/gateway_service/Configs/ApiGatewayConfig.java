@@ -24,6 +24,9 @@ public class ApiGatewayConfig {
 						.path("/ws/products/**")
 						.uri("lb://product-service"))
 				.route(p -> p
+						.path("/ws/favorites/**")
+						.uri("lb://product-service"))
+				.route(p -> p
 						.path("/currency/**")
 						.uri("lb://currency-service"))
 				.route(p -> p
